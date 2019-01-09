@@ -1,5 +1,2 @@
-require "nba_info/version"
-
-module NbaInfo
-  # Your code goes here...
-end
+require_relative "./nba_info/version"
+require_relative "./nba_info/cli"

@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "./lib/nba_info"
+
+NbaInfo::CLI.new.call
