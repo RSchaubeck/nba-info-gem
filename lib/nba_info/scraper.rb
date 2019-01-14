@@ -21,7 +21,7 @@ class NbaInfo::Scraper
     nba
   end
 
-  def self.scrape_record
+  def self.scrape_stats
     html = open("http://www.espn.com/nba/standings")
     doc = Nokogiri::HTML(html)
     nba = {:east => [], :west => []}
