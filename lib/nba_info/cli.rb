@@ -11,4 +11,13 @@ class NbaInfo::CLI
     DOC
   end
 
+  def schedule
+  end
+
+  def standings
+  end
+
+  def team_record
+  end
+
 end
