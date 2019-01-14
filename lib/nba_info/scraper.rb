@@ -1,45 +1,52 @@
 class NbaInfo::Scraper
 
-  @@nba = {"east" => [], "west" => []}
-
-
-  def self.scrape_team(url)
+  def self.scrape_team
     html = open("http://www.espn.com/nba/standings")
     doc = Nokogiri::HTML(html)
+    nba = {:east => [], :west => []}
     names = doc.css('span.hide-mobile a')
     names.each_with_index do |t, i|
-      team = self.new
-      team.name = t.text
-      if i + 1 < 16
-        team.place = i + 1
-        @@nba["east"] << team
+      if i < 15
+        nba[:east] << {
+          name: t.text,
+          place: i + 1
+      }
       else
-        team.place = i - 14
-        @@nba["west"] << team
+        nba[:west] << {
+          name: t.text,
+          place: i - 14
+      }
       end
     end
-    @@nba
+    nba
   end
 
-  def self.record(url)
+  def self.scrape_record
     html = open("http://www.espn.com/nba/standings")
     doc = Nokogiri::HTML(html)
+    nba = {:east => [], :west => []}
     records = doc.css('table.Table2__table-scroller tbody.Table2__tbody tr')
     records.each_with_index do |r, i|
       wins = r.css('td:first-child span').text
       loss = r.css('td:nth-child(2) span').text
       record = "#{wins} - #{loss}"
-      if i < 16
-        @@nba["east"][i].record = record
+      gb = r.css('td:nth-child(4) span').text
+      strk = r.css('td:nth-child(12) span').text
+      if i < 15
+        nba[:east] << {
+          record: record,
+          gb: gb,
+          streak: strk
+        }
       else
-        @@nba["west"][i].record = record
+        nba[:west] << {
+          record: record,
+          gb: gb,
+          streak: strk
+        }
       end
     end
-    @@nba
-  end
-
-  def all
-    @@nba
+    nba
   end
 
 
