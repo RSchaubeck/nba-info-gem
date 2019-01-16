@@ -49,5 +49,20 @@ class NbaInfo::Scraper
     nba
   end
 
+  def self.scrape_schedule
+    html = open("http://www.espn.com/nba/schedule")
+    doc = Nokogiri::HTML(html)
+    schedule = []
+    games = doc.css('table')[0].css('tbody tr')
+    games.each do |game|
+      schedule << {
+        away: game.css('td:first-child a span').text,
+        home: game.css('td:nth-child(2) a span').text,
+        time: game.css('td:nth-child(3)').text
+      }
+    end
+    schedule
+  end
+
 
 end
