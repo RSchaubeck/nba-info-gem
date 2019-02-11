@@ -1,6 +1,10 @@
 class NbaInfo::CLI
 
   def call
+
+  end
+
+  def instruct
     puts <<-DOC.gsub /^\s*/, ''
       Welcome to the NBA Info CLI gem!
       List of commands:
@@ -14,10 +18,29 @@ class NbaInfo::CLI
   def schedule
   end
 
-  def standings
+  def self.standings
+    nba = NbaInfo::Team.add_stats
+    puts <<-DOC.gsub /^\s*/, ''
+      EASTERN CONFERENCE
+      Team                   |Record   | GB
+      ----------------------------------------
+    DOC
+    nba[:east].each do |team|
+      puts "#{team.name.ljust(23)} #{team.record.ljust(9)} #{team.gb}"
+    end
+    puts <<-DOC.gsub /^\s*/, ''
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      WESTERN CONFERENCE
+      Team                   |Record   | GB
+      ----------------------------------------
+    DOC
+    nba[:west].each do |team|
+      puts "#{team.name.ljust(23)} #{team.record.ljust(9)} #{team.gb}"
+    end
+    ""
   end
 
-  def team_record
+  def team
   end
 
 end

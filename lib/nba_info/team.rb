@@ -24,9 +24,15 @@ class NbaInfo::Team
   end
 
   def self.add_stats
+    self.create
     stats = NbaInfo::Scraper.scrape_stats
     @@nba[:east].each_with_index do |team, i|
       stats[:east][i].each do |key, val|
+        team.send "#{key}=", val
+      end
+    end
+    @@nba[:west].each_with_index do |team, i|
+      stats[:west][i].each do |key, val|
         team.send "#{key}=", val
       end
     end
