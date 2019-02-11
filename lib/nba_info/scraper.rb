@@ -31,18 +31,27 @@ class NbaInfo::Scraper
       loss = r.css('td:nth-child(2) span').text
       record = "#{wins} - #{loss}"
       gb = r.css('td:nth-child(4) span').text
+      ppg = r.css('td:nth-child(9) span').text
+      opp_ppg = r.css('td:nth-child(10) span').text
       strk = r.css('td:nth-child(12) span').text
+      l_ten = r.css('td:last-child span').text
       if i < 15
         nba[:east] << {
           record: record,
           gb: gb,
-          streak: strk
+          ppg: ppg,
+          opp_ppg: opp_ppg,
+          streak: strk,
+          l_ten: l_ten
         }
       else
         nba[:west] << {
           record: record,
           gb: gb,
-          streak: strk
+          ppg: ppg,
+          opp_ppg: opp_ppg,
+          streak: strk,
+          l_ten: l_ten
         }
       end
     end
