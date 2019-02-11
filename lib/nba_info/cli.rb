@@ -47,7 +47,19 @@ class NbaInfo::CLI
     ""
   end
 
-  def team
+  def self.team
+    nba = NbaInfo::Team.add_stats
+    input = gets.strip.capitalize
+    if nba[:east].any?{|team| team.name.include?(input)}
+      team = nba[:east].detect{|t| t.name.include?(input)}
+      puts "#{team.name}(#{team.record}) -- PPG: #{team.ppg} -- OPP PPG: #{team.opp_ppg} -- L10: #{team.l_ten} -- Streak: #{team.streak}"
+    elsif nba[:west].any?{|team| team.name.include?(input)}
+      team = nba[:west].detect{|t| t.name.include?(input)}
+      puts "#{team.name}(#{team.record}) -- PPG: #{team.ppg} -- OPP PPG: #{team.opp_ppg} -- L10: #{team.l_ten} -- Streak: #{team.streak}"
+    else
+      "Make sure you omitted the city and spelled the team name correctly"
+    end
+    ""
   end
 
 end

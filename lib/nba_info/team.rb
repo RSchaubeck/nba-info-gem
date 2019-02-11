@@ -1,6 +1,6 @@
 class NbaInfo::Team
 
-  attr_accessor :name, :place, :record, :gb, :streak
+  attr_accessor :name, :place, :record, :gb, :streak, :ppg, :opp_ppg, :l_ten
 
   @@nba = {:east => [], :west => []}
 
