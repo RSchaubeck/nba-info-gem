@@ -8,6 +8,9 @@ class NbaInfo::CLI
       when "commands"
         instruct
         input = gets.strip
+      when "key"
+        key
+        input = gets.strip
       when "schedule"
         schedule
         input = gets.strip
@@ -29,6 +32,7 @@ class NbaInfo::CLI
       Welcome to the NBA Info CLI gem!
       List of commands:
       commands - show these commands again
+      key - show meanings of the stat abbreviations
       schedule - show todays schedule
       standings - show current standings
       team - get more info about a team
@@ -73,14 +77,24 @@ class NbaInfo::CLI
     input = gets.strip.capitalize
     if nba[:east].any?{|team| team.name.include?(input)}
       team = nba[:east].detect{|t| t.name.include?(input)}
-      puts "#{team.name}(#{team.record}) -- PPG: #{team.ppg} -- OPP PPG: #{team.opp_ppg} -- L10: #{team.l_ten} -- Streak: #{team.streak}"
+      puts "#{team.name}(#{team.record}) -- PPG: #{team.ppg} -- OPP PPG: #{team.opp_ppg} -- L10: #{team.l_ten} -- Strk: #{team.streak}"
     elsif nba[:west].any?{|team| team.name.include?(input)}
       team = nba[:west].detect{|t| t.name.include?(input)}
-      puts "#{team.name}(#{team.record}) -- PPG: #{team.ppg} -- OPP PPG: #{team.opp_ppg} -- L10: #{team.l_ten} -- Streak: #{team.streak}"
+      puts "#{team.name}(#{team.record}) -- PPG: #{team.ppg} -- OPP PPG: #{team.opp_ppg} -- L10: #{team.l_ten} -- Strk: #{team.streak}"
     else
       "Make sure you omitted the city and spelled the team name correctly"
     end
     ""
+  end
+
+  def key
+    puts <<-DOC.gsub /^\s*/, ''
+      GB - games back
+      PPG - points per game
+      OPP PPG - opponents points per game
+      L10 - last 10
+      Strk - streak
+    DOC
   end
 
 end
