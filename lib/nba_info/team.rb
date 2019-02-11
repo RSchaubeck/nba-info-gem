@@ -12,13 +12,15 @@ class NbaInfo::Team
 
   def self.create
     nba = NbaInfo::Scraper.scrape_team
-    nba[:east].each do |team|
-      t = self.new(team)
-      @@nba[:east] << t
-    end
-    nba[:west].each do |team|
-      t = self.new(team)
-      @@nba[:west] << t
+    if @@nba[:east].empty? || @@nba[:west].empty?
+      nba[:east].each do |team|
+        t = self.new(team)
+        @@nba[:east] << t
+      end
+      nba[:west].each do |team|
+        t = self.new(team)
+        @@nba[:west] << t
+      end
     end
     @@nba
   end

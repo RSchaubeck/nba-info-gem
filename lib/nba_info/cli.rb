@@ -1,22 +1,42 @@
 class NbaInfo::CLI
 
   def call
-
+    instruct
+    input = gets.strip
+    until input == "exit"
+      case input
+      when "commands"
+        instruct
+        input = gets.strip
+      when "schedule"
+        schedule
+        input = gets.strip
+      when "standings"
+        standings
+        input = gets.strip
+      when "team"
+        team
+        input = gets.strip
+      else
+        puts "Not a valid command"
+        input = gets.strip
+      end
+    end
   end
 
   def instruct
     puts <<-DOC.gsub /^\s*/, ''
       Welcome to the NBA Info CLI gem!
       List of commands:
-      commands - shows list of commands
-      schedule - shows todays schedule
-      standings - shows current standings
-      Lastly, you can type the name of a team (omit the city e.g. knicks, warriors)
-      to get more info about them
+      commands - show these commands again
+      schedule - show todays schedule
+      standings - show current standings
+      team - get more info about a team
+      exit - exit program
     DOC
   end
 
-  def self.schedule
+  def schedule
     sched = NbaInfo::Scraper.scrape_schedule
     puts "All times are Eastern Standard"
     sched.each do |game|
@@ -25,7 +45,7 @@ class NbaInfo::CLI
     ""
   end
 
-  def self.standings
+  def standings
     nba = NbaInfo::Team.add_stats
     puts <<-DOC.gsub /^\s*/, ''
       EASTERN CONFERENCE
@@ -47,8 +67,9 @@ class NbaInfo::CLI
     ""
   end
 
-  def self.team
+  def team
     nba = NbaInfo::Team.add_stats
+    puts "Type the name of a team (omit the city from the search e.g. new york knicks would just be knicks)"
     input = gets.strip.capitalize
     if nba[:east].any?{|team| team.name.include?(input)}
       team = nba[:east].detect{|t| t.name.include?(input)}
