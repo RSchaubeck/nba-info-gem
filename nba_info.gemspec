@@ -5,7 +5,7 @@ require "nba_info/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "nba_info"
-  spec.version       = "0.2.0"
+  spec.version       = "0.3.0"
   spec.authors       = ["RSchaubeck"]
   spec.email         = ["richard.schaubeck@gmail.com"]
 

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nba_info (0.2.0)
+    nba_info (0.3.0)
       nokogiri
 
 GEM
