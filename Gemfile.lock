@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nba_info (0.1.0)
+    nba_information (1.0.0)
       nokogiri
 
 GEM
@@ -22,7 +22,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
-  nba_info!
+  nba_information!
   pry
   rake (~> 10.0)
 
