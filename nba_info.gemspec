@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "nba_info/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "nba_info"
+  spec.name          = "nba_information"
   spec.version       = NbaInfo::VERSION
   spec.authors       = ["RSchaubeck"]
   spec.email         = ["richard.schaubeck@gmail.com"]
