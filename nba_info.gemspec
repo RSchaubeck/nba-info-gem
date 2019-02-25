@@ -5,7 +5,7 @@ require "nba_info/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "nba_info"
-  spec.version       = "0.3.0"
+  spec.version       = NbaInfo::VERSION
   spec.authors       = ["RSchaubeck"]
   spec.email         = ["richard.schaubeck@gmail.com"]
 
@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.16"
-  spec.add_development_dependency "rake", "~> 12.0"
+  spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "pry"
 
   spec.add_dependency "nokogiri"
