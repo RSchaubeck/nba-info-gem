@@ -41,16 +41,4 @@ class NbaInfo::Team
     @@nba
   end
 
-  def all
-    @@nba
-  end
-
-  def east
-    @@nba[:east]
-  end
-
-  def west
-    @@nba[:west]
-  end
-
 end

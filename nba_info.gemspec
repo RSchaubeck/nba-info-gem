@@ -5,7 +5,7 @@ require "nba_info/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "nba_information"
-  spec.version       = "1.0.0"
+  spec.version       = NbaInfo::VERSION
   spec.authors       = ["RSchaubeck"]
   spec.email         = ["richard.schaubeck@gmail.com"]
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
   spec.bindir        = "bin"
-  spec.executables   << "nba-info"
+  spec.executables   << "nba_information"
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.16"
