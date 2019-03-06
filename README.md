@@ -1,7 +1,7 @@
 NBA Information Gem
 
 This is a CLI gem for the NBA. Check the current conference standings, view the schedule of games for today,
-or view your favorite teams stats. All standings, stats, and schedules are updated in realtime.
+or view your favorite teams stats. All standings, stats, and schedules are updated in realtime from espn and sports illustrated.
 
 ## Installation
 From the command line:
@@ -10,7 +10,7 @@ From the command line:
 ## Usage
 
 Once installed, type
-<pre><code>nba-info</code></pre>
+<pre><code>nba_information</code></pre>
 and follow the instructions from there.
 
 ## Development
