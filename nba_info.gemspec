@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["richard.schaubeck@gmail.com"]
 
   spec.summary       = "nba info"
-  spec.description   =
+  spec.description   = "An NBA CLI gem to check current standings, team stats, and the current day's schedule"
   spec.homepage      = "https://github.com/RSchaubeck/nba-info-gem"
   spec.license       = "MIT"
 

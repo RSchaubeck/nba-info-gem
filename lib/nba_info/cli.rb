@@ -53,20 +53,20 @@ class NbaInfo::CLI
     nba = NbaInfo::Team.add_stats
     puts <<-DOC.gsub /^\s*/, ''
       EASTERN CONFERENCE
-      Team                   |Record   |Win % | GB
-      ----------------------------------------------
+      Team                   | Record   | Win % | GB
+      ------------------------------------------------
     DOC
     nba[:east].each do |team|
-      puts "#{team.name.ljust(23)} #{team.record.ljust(9)} #{team.win_pct.ljust(6)} #{team.gb}"
+      puts "#{team.name.ljust(23)}| #{team.record.ljust(9)}| #{team.win_pct.ljust(6)}| #{team.gb}"
     end
     puts <<-DOC.gsub /^\s*/, ''
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       WESTERN CONFERENCE
-      Team                   |Record   |Win % | GB
-      ----------------------------------------------
+      Team                   | Record   | Win % | GB
+      ------------------------------------------------
     DOC
     nba[:west].each do |team|
-      puts "#{team.name.ljust(23)} #{team.record.ljust(9)} #{team.win_pct.ljust(6)} #{team.gb}"
+      puts "#{team.name.ljust(23)}| #{team.record.ljust(9)}| #{team.win_pct.ljust(6)}| #{team.gb}"
     end
     ""
   end
