@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nba_information (1.1.0)
+    nba_information (1.1.1)
       httparty (~> 0.18.1)
       nokogiri (~> 1.0)
 

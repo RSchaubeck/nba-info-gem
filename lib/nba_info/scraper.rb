@@ -1,7 +1,7 @@
 class NbaInfo::Scraper
 
   def self.scrape_team
-    html = open("http://www.espn.com/nba/standings")
+    html = HTTParty.get('http://www.espn.com/nba/standings')
     doc = Nokogiri::HTML(html)
     nba = {:east => [], :west => []}
     names = doc.css('span.hide-mobile a')
@@ -25,31 +25,37 @@ class NbaInfo::Scraper
     html = open("http://www.espn.com/nba/standings")
     doc = Nokogiri::HTML(html)
     nba = {:east => [], :west => []}
-    records = doc.css('table.Table2__table-scroller tbody.Table2__tbody tr')
+    records = doc.css('div.Table__ScrollerWrapper table tbody tr')
     records.each_with_index do |r, i|
       wins = r.css('td:first-child span').text
       loss = r.css('td:nth-child(2) span').text
+      win_pct = r.css('td:nth-child(3) span').text
       record = "#{wins} - #{loss}"
       gb = r.css('td:nth-child(4) span').text
       ppg = r.css('td:nth-child(9) span').text
       opp_ppg = r.css('td:nth-child(10) span').text
+      diff = r.css('td:nth-child(11) span').text
       strk = r.css('td:nth-child(12) span').text
       l_ten = r.css('td:last-child span').text
       if i < 15
         nba[:east] << {
           record: record,
+          win_pct: win_pct,
           gb: gb,
           ppg: ppg,
           opp_ppg: opp_ppg,
+          diff: diff,
           streak: strk,
           l_ten: l_ten
         }
       else
         nba[:west] << {
           record: record,
+          win_pct: win_pct,
           gb: gb,
           ppg: ppg,
           opp_ppg: opp_ppg,
+          diff: diff,
           streak: strk,
           l_ten: l_ten
         }
