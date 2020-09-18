@@ -22,7 +22,7 @@ class NbaInfo::Scraper
   end
 
   def self.scrape_stats
-    html = open("http://www.espn.com/nba/standings")
+    html = HTTParty.get("http://www.espn.com/nba/standings")
     doc = Nokogiri::HTML(html)
     nba = {:east => [], :west => []}
     records = doc.css('div.Table__ScrollerWrapper table tbody tr')
@@ -65,15 +65,16 @@ class NbaInfo::Scraper
   end
 
   def self.scrape_schedule
-    html = open("https://www.si.com/nba/schedule")
+    html = HTTParty.get("https://www.cbssports.com/nba/schedule/")
     doc = Nokogiri::HTML(html)
     schedule = []
-    games = doc.css('table')[0].css('tr:not(:first-child)')
+    games = doc.css('table.TableBase-table tbody tr')
     games.each do |game|
       schedule << {
-        away: game.css('td:first-child span.team-abbreviation')[0].text.gsub(/\s+/, ""),
-        home: game.css('td:nth-child(2) span.team-abbreviation')[0].text.gsub(/\s+/, ""),
-        time: game.css('td:nth-child(3)').text.strip
+        away: game.css('td:first-child span.TeamName a').text,
+        home: game.css('td:nth-child(2) span.TeamName a').text,
+        time: game.css('td:nth-child(3) div.CellGame a').text,
+        tv: game.css('td:nth-child(3) div.CellGame div.CellGameTv').text.strip
       }
     end
     schedule
