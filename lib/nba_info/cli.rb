@@ -44,7 +44,7 @@ class NbaInfo::CLI
     sched = NbaInfo::Scraper.scrape_schedule
     puts "All times are Eastern Standard"
     sched.each do |game|
-      puts "#{game[:away].ljust(4)} @  #{game[:home].ljust(4)} -  #{game[:time]}"
+      puts "#{game[:away].ljust(4)} @  #{game[:home].ljust(4)} -  #{game[:time]}/#{game[:tv]}"
     end
     ""
   end
@@ -53,20 +53,20 @@ class NbaInfo::CLI
     nba = NbaInfo::Team.add_stats
     puts <<-DOC.gsub /^\s*/, ''
       EASTERN CONFERENCE
-      Team                   |Record   | GB
-      ----------------------------------------
+      Team                   |Record   |Win % | GB
+      ----------------------------------------------
     DOC
     nba[:east].each do |team|
-      puts "#{team.name.ljust(23)} #{team.record.ljust(9)} #{team.gb}"
+      puts "#{team.name.ljust(23)} #{team.record.ljust(9)} #{team.win_pct.ljust(6)} #{team.gb}"
     end
     puts <<-DOC.gsub /^\s*/, ''
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       WESTERN CONFERENCE
-      Team                   |Record   | GB
-      ----------------------------------------
+      Team                   |Record   |Win % | GB
+      ----------------------------------------------
     DOC
     nba[:west].each do |team|
-      puts "#{team.name.ljust(23)} #{team.record.ljust(9)} #{team.gb}"
+      puts "#{team.name.ljust(23)} #{team.record.ljust(9)} #{team.win_pct.ljust(6)} #{team.gb}"
     end
     ""
   end
@@ -77,10 +77,10 @@ class NbaInfo::CLI
     input = gets.strip.capitalize
     if nba[:east].any?{|team| team.name.include?(input)}
       team = nba[:east].detect{|t| t.name.include?(input)}
-      puts "#{team.name}(#{team.record}) -- PPG: #{team.ppg} -- OPP PPG: #{team.opp_ppg} -- L10: #{team.l_ten} -- Strk: #{team.streak}"
+      puts "#{team.name}(#{team.record}) -- PPG: #{team.ppg} -- OPP PPG: #{team.opp_ppg} -- Diff: #{team.diff} -- L10: #{team.l_ten} -- Strk: #{team.streak}"
     elsif nba[:west].any?{|team| team.name.include?(input)}
       team = nba[:west].detect{|t| t.name.include?(input)}
-      puts "#{team.name}(#{team.record}) -- PPG: #{team.ppg} -- OPP PPG: #{team.opp_ppg} -- L10: #{team.l_ten} -- Strk: #{team.streak}"
+      puts "#{team.name}(#{team.record}) -- PPG: #{team.ppg} -- OPP PPG: #{team.opp_ppg} -- Diff: #{team.diff} -- L10: #{team.l_ten} -- Strk: #{team.streak}"
     else
       "Make sure you omitted the city and spelled the team name correctly"
     end
@@ -93,7 +93,7 @@ class NbaInfo::CLI
       PPG - points per game
       OPP PPG - opponents points per game
       L10 - last 10
-      Strk - streak
+      Strk - current winning/losing streak
     DOC
   end
 
