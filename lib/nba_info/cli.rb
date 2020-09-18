@@ -2,27 +2,27 @@ class NbaInfo::CLI
 
   def call
     instruct
-    input = gets.strip.capitalize
-    until input == "Exit"
+    input = gets.strip.downcase
+    until input == "exit"
       case input
-      when "Commands"
+      when "commands"
         instruct
-        input = gets.strip.capitalize
-      when "Key"
+        input = gets.strip.downcase
+      when "key"
         key
-        input = gets.strip.capitalize
-      when "Schedule"
+        input = gets.strip.downcase
+      when "schedule"
         schedule
-        input = gets.strip.capitalize
-      when "Standings"
+        input = gets.strip.downcase
+      when "standings"
         standings
-        input = gets.strip.capitalize
-      when "Team"
+        input = gets.strip.downcase
+      when "team"
         team
-        input = gets.strip.capitalize
+        input = gets.strip.downcase
       else
         puts "Not a valid command"
-        input = gets.strip.capitalize
+        input = gets.strip.downcase
       end
     end
   end
